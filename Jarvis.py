@@ -5,6 +5,7 @@ import wikipedia
 import webbrowser
 import os as o
 import smtplib # for Emaling purpose
+from googletrans import Translator # for translation function
 
 
 
@@ -83,6 +84,11 @@ def openmyfolder():
     print(files)
     o.startfile(my_dir)
 
+def translate_text(text, target_language):
+    translator = Translator()
+    translated_text = translator.translate(text, dest=target_language)
+    return translated_text.text
+
 if __name__ =="__main__" :
     greeting()
     while True :
@@ -106,6 +112,14 @@ if __name__ =="__main__" :
             VS_code()
         elif 'open brave' in query :
             brave()
+        elif 'Translation' in query : 
+            speak( " ohk , Select the Language to translate from english ")
+            langquery= TakeInput().lower()
+            speak ( " now speack what to translate")
+            tquery= TakeInput().lower()
+            tquery_ans = translate_text(tquery, langquery) 
+            speak(tquery_ans)
+
         elif 'quit' in query :
             speak("OK Boss Quiting..have a Good Instance")
             break
